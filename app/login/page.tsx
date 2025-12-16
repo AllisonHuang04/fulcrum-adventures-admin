@@ -29,7 +29,7 @@ export default function LoginPage() {
 
     setTimeout(() => {
       localStorage.setItem("user", JSON.stringify({ email }))
-      toast.success("Signed in successfully" )
+      toast.success("Signed in successfully")
       setTimeout(() => router.push("/activities"), 500)
     }, 1000)
   }

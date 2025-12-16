@@ -150,4 +150,4 @@ export interface Activity {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered))
     return true
   }
-  // remove later
+  

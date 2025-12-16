@@ -97,10 +97,7 @@ export function ActivityLibrary() {
     const updated = updateActivity(activityId, { status: newStatus })
     if (updated) {
       setActivities(getActivities())
-      toast({
-        variant: "success",
-        description: `Activity ${newStatus === "archived" ? "archived" : "updated"} successfully`,
-      })
+      toast.success(`Activity ${newStatus === "archived" ? "archived" : "updated"} successfully`)
     }
   }
 
@@ -144,10 +141,8 @@ export function ActivityLibrary() {
     setSelectedActivities([])
     setSelectMode(false)
     setBulkDeleteDialogOpen(false)
-    toast({
-      variant: "success",
-      description: `${selectedActivities.length} activities deleted successfully`,
-    })
+    toast.success(`${selectedActivities.length} activities deleted successfully`
+    )
   }
 
   const handleBulkArchive = () => {
@@ -156,10 +151,7 @@ export function ActivityLibrary() {
     setSelectedActivities([])
     setSelectMode(false)
     setBulkArchiveDialogOpen(false)
-    toast({
-      variant: "success",
-      description: `${selectedActivities.length} activities archived successfully`,
-    })
+    toast.success(`${selectedActivities.length} activities archived successfully`)
   }
 
   const handleDelete = (activityId: string) => {
@@ -172,10 +164,7 @@ export function ActivityLibrary() {
       const success = deleteActivity(activityToDelete)
       if (success) {
         setActivities(getActivities())
-        toast({
-          variant: "success",
-          description: "Activity deleted successfully",
-        })
+        toast.success("Activity deleted successfully")
       }
       setActivityToDelete(null)
       setDeleteDialogOpen(false)

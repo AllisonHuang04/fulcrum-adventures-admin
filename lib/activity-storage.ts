@@ -11,6 +11,7 @@ export interface Activity {
     overview: string
     lastEdited: string
     createdAt: Date
+    thumbnailUrl?: string
     content: {
       prep: string
       setup: string
@@ -21,8 +22,8 @@ export interface Activity {
         variations: string
         safety: string
       }
-      customTabs: { id: string; name: string; content: string }[]
     }
+    customTabs: { id: string; name: string; content: string }[]
   }
   
   const STORAGE_KEY = "fulcrum_activities"
@@ -46,6 +47,7 @@ export interface Activity {
           overview: "A great icebreaker to help students connect and learn names",
           lastEdited: "2 days ago",
           createdAt: new Date("2024-01-15"),
+          thumbnailUrl: "/placeholder.svg?height=200&width=300",
           content: {
             prep: "",
             setup: "",
@@ -53,8 +55,8 @@ export interface Activity {
             play: "",
             reflection: "",
             additional: { variations: "", safety: "" },
-            customTabs: [],
           },
+          customTabs: [],
         },
         {
           id: "2",
@@ -76,8 +78,8 @@ export interface Activity {
             play: "",
             reflection: "",
             additional: { variations: "", safety: "" },
-            customTabs: [],
           },
+          customTabs: [],
         },
         {
           id: "3",
@@ -99,8 +101,8 @@ export interface Activity {
             play: "",
             reflection: "",
             additional: { variations: "", safety: "" },
-            customTabs: [],
           },
+          customTabs: [],
         },
       ]
       localStorage.setItem(STORAGE_KEY, JSON.stringify(mockActivities))
@@ -137,7 +139,7 @@ export interface Activity {
   }
   
   export function getActivityById(id: string): Activity | null {
-    const activities = getActivities()
+    const activities = getActivities() 
     return activities.find((a) => a.id === id) || null
   }
   
@@ -148,4 +150,4 @@ export interface Activity {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered))
     return true
   }
-  
+  // remove later

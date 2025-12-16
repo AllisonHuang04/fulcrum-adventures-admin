@@ -12,10 +12,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { Slider } from "@/components/ui/slider"
 import { ImageIcon, Video, Upload, X, Plus, Trash2 } from "lucide-react"
-import { AdminHeader } from "./admin-header"
+import { AdminHeader } from "@/components/admin-header"
 import { useRouter } from "next/navigation"
 import { saveActivity, updateActivity, getActivityById } from "@/lib/activity-storage"
-import { toast } from "@/hooks/use-toast"
+import { toast } from "sonner"
 
 interface ActivityEditorProps {
   mode: "create" | "edit"
@@ -77,7 +77,7 @@ export function ActivityEditor({ mode, activityId }: ActivityEditorProps) {
         setReflectionContent(activity.content.reflection)
         setVariationsContent(activity.content.additional.variations)
         setSafetyContent(activity.content.additional.safety)
-        setCustomTabs(activity.content.customTabs)
+        setCustomTabs(activity.customTabs)
 
         // Parse grade level
         const gradeParts = activity.gradeLevel.split("-")
@@ -162,18 +162,14 @@ export function ActivityEditor({ mode, activityId }: ActivityEditorProps) {
   const handleSave = (status: "published" | "draft") => {
     // Validation
     if (!title.trim()) {
-      toast({
-        variant: "error",
-        description: "Title is required",
-      })
+      toast.error("Title is required"
+      )
       return
     }
 
     if (selectedCategories.length === 0) {
-      toast({
-        variant: "error",
-        description: "Please select at least one category",
-      })
+      toast.error("Please select at least one category"
+      )
       return
     }
 
@@ -187,18 +183,14 @@ export function ActivityEditor({ mode, activityId }: ActivityEditorProps) {
     // }
 
     if (!groupSizeAny && (!groupSizeMin || !groupSizeMax)) {
-      toast({
-        variant: "error",
-        description: "Group size is required",
-      })
+      toast.error("Group size is required"
+      )
       return
     }
 
     if (!thumbnailUploaded && !activityId) {
-      toast({
-        variant: "error",
-        description: "Thumbnail image is required",
-      })
+      toast.error("Thumbnail image is required"
+      )
       return
     }
 
@@ -226,23 +218,17 @@ export function ActivityEditor({ mode, activityId }: ActivityEditorProps) {
           variations: variationsContent,
           safety: safetyContent,
         },
-        customTabs,
       },
+      customTabs,
     }
 
     if (activityId) {
-      updateActivity(activityId, activityData)
-      toast({
-        variant: "success",
-        description: `Activity ${status === "published" ? "published" : "saved as draft"} successfully`,
-      })
-    } else {
-      saveActivity(activityData)
-      toast({
-        variant: "success",
-        description: `Activity ${status === "published" ? "published" : "saved as draft"} successfully`,
-      })
-    }
+        updateActivity(activityId, activityData)
+        toast.success(`Activity ${status === "published" ? "published" : "saved as draft"} successfully`)
+      } else {
+        saveActivity(activityData)
+        toast.success(`Activity ${status === "published" ? "published" : "saved as draft"} successfully`)
+      }
 
     router.push("/activities")
   }
